@@ -1,4 +1,4 @@
-import { MAYUR, RUPALI } from "../../BLOG_CONSTANTS/_BLOG_SETUP";
+import { DBCM, RUPALI } from "../../BLOG_CONSTANTS/_BLOG_SETUP";
 import { iArticle } from "../shared/interfaces";
 
 export const MOCK_ARTICLES_LIST: iArticle[] = [
@@ -6,7 +6,7 @@ export const MOCK_ARTICLES_LIST: iArticle[] = [
         path: '/pages/tutorial/how-to-setup-blog.tsx',
         featureArticle: true,
         preview: {
-            author: MAYUR,
+            author: DBCM,
             date: "August 08 2022",
             articleTitle: "How to setup this blog template",
             tags: "demo, blog setup",
@@ -20,7 +20,7 @@ export const MOCK_ARTICLES_LIST: iArticle[] = [
             keywords: "demo, blog setup",
             ogImage: "/public/imp_assets/tutorials/how-to-setup-blog.svg",
             twitterHandle: "@mayur_nalwala",
-            author: MAYUR.name
+            author: DBCM.name
         }
     },
     {
@@ -75,7 +75,7 @@ export const MOCK_ARTICLES_LIST: iArticle[] = [
     {
         path: '/pages/tutorial/blog-with-sidebar-layout.tsx',
         preview: {
-            author: MAYUR,
+            author: DBCM,
             date: "August 14 2022",
             articleTitle: "Page Layout for a article with sidebar",
             tags: "demo, with sidebar, default layout",
@@ -121,7 +121,7 @@ export const MOCK_ARTICLES_LIST: iArticle[] = [
     {
         path: '/pages/style-guide.tsx',
         preview: {
-            author: MAYUR,
+            author: DBCM,
             date: "August 10 2022",
             articleTitle: "Style Guide",
             tags: "demo, all components, style guide, styling tutorial",
@@ -136,7 +136,7 @@ export const MOCK_ARTICLES_LIST: iArticle[] = [
     {
         path: '/pages/icons.tsx',
         preview: {
-            author: MAYUR,
+            author: DBCM,
             date: "August 13 2022",
             articleTitle: "How to use icons",
             tags: "demo, all components, style guide, styling tutorial, icons, how to use icons in website",
