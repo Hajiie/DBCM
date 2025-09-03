@@ -14,8 +14,8 @@ const Article = () => {
             The forum advocated for the establishment of a control tower to integrate road, rail, river dams, ports, and plants from a national development perspective.
             </p>
             <div className='Infra Forum' style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap:'20px'}}>
-                <Image src='/public/images/2508News1.jpg' alt='미래국토인프라 포럼-1' size={ImageSize.MEDIUM}/>
-                <Image src='/public/images/2508News2.png' alt='미래국토인프라 포럼-2' size={ImageSize.MEDIUM}/>
+                <Image src='/images/2508News1.jpg' alt='미래국토인프라 포럼-1' size={ImageSize.MEDIUM}/>
+                <Image src='/images/2508News2.png' alt='미래국토인프라 포럼-2' size={ImageSize.MEDIUM}/>
             </div>
             <div className="px-4 py-3 dark:bg-slate-900 bg-blue-200 rounded mt-5 !text-lg leading-relaxed">
                 <a href="https://www.mcnews.co.kr/82096" target="_blank" rel="noopener noreferrer"><u><i>[매일건설신문] 미래국인프라 혁신포럼 창립총회 및 기념세미나</i></u></a>.

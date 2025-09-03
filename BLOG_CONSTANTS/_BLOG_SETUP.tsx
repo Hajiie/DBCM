@@ -158,5 +158,5 @@ export const DEFAULT_SEO: iSEO = {
     url: WEBSITE_URL,
     author: `${DBCM.name}, ${SUNGHEE.name}`,
     twitterHandle: '',
-    ogImage: '/public/images/DBCM_logo.jpg'
+    ogImage: '/images/DBCM_logo.jpg'
 }

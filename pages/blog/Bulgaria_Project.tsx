@@ -14,8 +14,8 @@ const Article = () => {
                 Prof. Ahn presented the final findings of the thematic research to the Bulgarian government and related organizations and disseminated the project's findings for policy recommendations.
             </p>
             <div className='Bulgaria_Project' style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap:'20px'}}>
-                <Image src='/public/images/2406News1.png' alt='불가리아 프로젝트-1' size={ImageSize.MEDIUM}/>
-                <Image src='/public/images/2406News2.png' alt='불가리아 프로젝트-2' size={ImageSize.MEDIUM}/>
+                <Image src='/images/2406News1.png' alt='불가리아 프로젝트-1' size={ImageSize.MEDIUM}/>
+                <Image src='/images/2406News2.png' alt='불가리아 프로젝트-2' size={ImageSize.MEDIUM}/>
             </div>
             {/*<div className="px-4 py-3 dark:bg-slate-900 bg-blue-200 rounded mt-5 !text-lg leading-relaxed">*/}
             {/*    <a href="https://www.mcnews.co.kr/82096" target="_blank" rel="noopener noreferrer"><u><i>[매일건설신문] 미래국인프라 혁신포럼 창립총회 및 기념세미나</i></u></a>.*/}

@@ -16,7 +16,7 @@ const AboutUs = () => {
             <section className='container px-3 md:pb-20 md:pt-10 pt-20'>
                 <div className="">
                     <LinkTo href="/" passHref className="block md:w-[20%] w-[50%] ">
-                        <img src="/images/DBCM_logo.png" alt="DBCM Lab" className="rounded-lg overflow-hidden" />
+                        <Image src="/images/DBCM_logo.png" alt="DBCM Lab" className="rounded-lg overflow-hidden" />
                     </LinkTo>
                     <Text title className='mb-5 mt-10 dark:text-sky-400 text-sky-600'>
                         홍익대학교 DBCM Lab
