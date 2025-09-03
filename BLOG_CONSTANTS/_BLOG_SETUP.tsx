@@ -1,6 +1,13 @@
 import { LogoType, NavbarType } from "../src/shared/enums";
 import { IAuthor, iNavSetup, iSEO } from "../src/shared/interfaces";
-import { AiFillGithub, AiOutlineTwitter, AiFillLinkedin, AiFillInstagram, AiFillFacebook } from "react-icons/ai";
+import {
+    AiFillGithub,
+    AiOutlineTwitter,
+    AiFillLinkedin,
+    AiFillInstagram,
+    AiFillFacebook,
+    AiFillSmile
+} from "react-icons/ai";
 
 /**
  * EXAMPLE AUTHOR
@@ -29,38 +36,34 @@ export const DBCM: IAuthor = {
     bio: "",
     profilePic: "",
     social: [
-        {
-            icon: <AiFillGithub />,
-            link: 'https://github.com/nmayur'
-        },
-        {
-            icon: <AiFillLinkedin />,
-            link: 'https://www.linkedin.com/in/mayur-nalwala/'
-        },
+        // {
+        //     icon: <AiFillGithub />,
+        //     link: 'https://github.com/nmayur'
+        // },
+        // {
+        //     icon: <AiFillLinkedin />,
+        //     link: 'https://www.linkedin.com/in/mayur-nalwala/'
+        // },
     ]
 }
 
-export const RUPALI: IAuthor = {
-    name: "Rupali Yadav",
-    designation: "IT Analyst",
-    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+export const SUNGHEE: IAuthor = {
+    name: "Sunghee Lee",
+    designation: "Undergraduate Student",
+    bio: "Department of Civil and Environmental Engineering, Hongik University",
     profilePic: "",
     social: [
         {
             icon: <AiFillGithub />,
-            link: 'https://github.com/rupali-yadav'
-        },
-        {
-            icon: <AiFillLinkedin />,
-            link: 'https://www.linkedin.com/in/rupali-yadav-087bb4112/'
+            link: 'https://github.com/Hajiie'
         },
     ]
 }
 
 
 // This can your company name / your name etc for SEO purposes
-export const WEBSITE_NAME: string = 'Next Js Blog Template';
-export const WEBSITE_URL: string = 'https://nextjs-simple-blog-template.web.app/';
+export const WEBSITE_NAME: string = 'DBCM Lab';
+export const WEBSITE_URL: string = '/';
 
 /**
  * This is the main navigation setup.
@@ -77,8 +80,8 @@ export const PRIMARY_NAV: iNavSetup = {
     // },
     logo: {
         type: LogoType.IMAGE,
-        logo: '/images/DBCM_logo_small.png',
-        logoLight: '/images/DBCM_logo_small.png',
+        logo: '/images/DBCM_logo.png',
+        logoLight: '/images/DBCM_logo.png',
     },
     // navLinks are the main navbar links that apper on top of every page
     navLinks: [
@@ -97,14 +100,8 @@ export const PRIMARY_NAV: iNavSetup = {
             path: '/about-us'
         },
         {
-            // to open a link in new tab pass newTab: true
-            label: 'Support Us',
-            path: 'https://www.buymeacoffee.com/webexpe13z',
-            newTab: true
-        },
-        {
-            label: 'Github Repo',
-            path: 'https://github.com/webexpe13/blog-template-using-nextjs-typescript-tailwindcss',
+            label: 'Huggingface',
+            path: 'https://huggingface.co/DBCMLAB',
             newTab: true
         },
         {
@@ -129,13 +126,8 @@ export const PRIMARY_NAV: iNavSetup = {
             path: '/about-us'
         },
         {
-            label: 'Support Us',
-            path: 'https://www.buymeacoffee.com/webexpe13z',
-            newTab: true
-        },
-        {
-            label: 'Github Repo',
-            path: 'https://github.com/webexpe13/blog-template-using-nextjs-typescript-tailwindcss',
+            label: 'Huggingface',
+            path: 'https://huggingface.co/DBCMLAB',
             newTab: true
         },
         {
@@ -145,26 +137,26 @@ export const PRIMARY_NAV: iNavSetup = {
     ],
     socials: [
         {
-            link: 'https://www.facebook.com/',
-            icon: <AiFillFacebook />
+            link: 'https://huggingface.co/DBCMLAB',
+            icon: <AiFillSmile />
         },
         {
             link: 'https://www.instagram.com/',
             icon: <AiFillInstagram />
         },
         {
-            link: 'https://twitter.com/WebExpe',
+            link: 'https://twitter.com/',
             icon: <AiOutlineTwitter />
         },
     ]
 }
 
 export const DEFAULT_SEO: iSEO = {
-    title: "Nextjs simple blog template",
-    description: "A simple blog template using NextJS and Typescript.",
-    keywords: "Blog, next js, template, next js blog, blog setup, typescript, nextjs typescript, react js blog template, responsive blog template",
+    title: "DBCM Lab",
+    description: "Data-based Construction Management Lab at Hongik University",
+    keywords: "NLP, GraphDB, Hongik Univ., Data-based Construction Management Lab, Hongik University",
     url: WEBSITE_URL,
-    author: `${DBCM.name}, ${RUPALI.name}`,
-    twitterHandle: '@WebExpe',
-    ogImage: '/public/images/og-image.jpg'
+    author: `${DBCM.name}, ${SUNGHEE.name}`,
+    twitterHandle: '',
+    ogImage: '/public/images/DBCM_logo.jpg'
 }

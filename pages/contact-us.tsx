@@ -6,9 +6,9 @@ import { iSEO } from "../src/shared/interfaces";
 const ContactUs = () => {
     const PAGE_SEO: iSEO = {
         title: 'Contact Us',
-        description: 'For any any queries related to this project / template feel free to connect with us on webexpe13@gmail.com',
-        keywords: 'webexpx, contact us, webexpe13@gmail.com, next js blog template',
-        author: 'Mayur Nalwala, Rupali Yadav'
+        description: '문의사항이 있으시면 jun.ahn@hongik.ac.kr 으로 연락주시기 바랍니다.',
+        keywords: 'DBCM, contact us, jun.ahn@hongik.ac.kr, DBCM Lab',
+        author: 'SUNGHEE'
     } 
     return (
         <PageLayout PAGE_SEO={PAGE_SEO} home>
@@ -20,16 +20,30 @@ const ContactUs = () => {
                 <div className="flex flex-wrap mt-8 justify-between">
                     <div className="md:w-1/2 w-full md:pl-2">
                         <Text p className="!text-lg leading-relaxed">
-                            For any any queries related to this project / template feel free to connect with us at the given email.
-                            You can also post any comments on our <a href="https://github.com/webexpe13/blog-template-using-nextjs-typescript-tailwindcss/discussions" target="_blank" rel="noopener noreferrer"><u><i>github discussions</i></u></a>.
+                            문의사항이 있으시면 아래로 연락주시기 바랍니다
                         </Text>
+                        <address className="contact-info">
+                            <strong>데이터 기반 건설관리 연구실</strong>
+                            <br />
+                            홍익대학교 건설환경공학과
+                            <br />
+                            제4공학관 T507
+                            <br />
+                            서울, 대한민국
+                            <br />
+                            <br />
+                            <strong>Phone:</strong> <a href="tel:+82-2-320-1621">+82-2-320-1621</a>
+                            <br />
+                            <strong>Email:</strong>{' '}
+                            <a href="mailto:jun.ahn@hongik.ac.kr">jun.ahn@hongik.ac.kr</a>
+                        </address>
                     </div>
-                    <div className="md:w-1/3 w-full">
+                    <div className="md:w-1/3 md:h-1/2 w-full">
                         <Text p>
                             write to us at
                         </Text>
                         <Text subtitle className="!font-light md:!text-3xl">
-                            webexpe13@gmail.com
+                            <a href="mailto:jun.ahn@hongik.ac.kr">jun.ahn@hongik.ac.kr</a>
                         </Text>
                     </div>
                 </div>
@@ -41,7 +55,8 @@ const ContactUs = () => {
                     Work with us . . .
                 </Text>
                 <Text p className="!text-lg leading-relaxed mt-5 px-1">
-                    We are a group of developers and designers with more than 5 years of industry experience. If you have any requirements like Website Development, Website / App Design feel free to contact us on the given email.
+                    홍익대학교 DBCM Lab은 그래프 데이터베이스(GraphDB)와 데이터 사이언스를 활용하여 건설관리 및 안전 기술을 고도화하는 연구를 수행하고 있습니다.
+                    본 연구 분야와 관련하여 공동 연구, 기술 협력 등 새로운 가치를 함께 만들어나갈 분들의 모든 연락을 환영합니다.
                 </Text>
             </section>
         </PageLayout>
