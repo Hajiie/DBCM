@@ -3,8 +3,8 @@
 const isProd = process.env.NODE_ENV === 'production';
 const repo = 'DBCM';
 
-const assetPrefix = isProd? `/${repo}/` : '';
-const basePath = isProd ? `/${repo}` : '';
+const assetPrefix = isProd? `DBCM/${repo}/` : '';
+const basePath = isProd ? `DBCM/${repo}` : '';
 
 const nextConfig = {
   assetPrefix: assetPrefix,
