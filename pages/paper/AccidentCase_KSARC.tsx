@@ -1,6 +1,7 @@
 /**These are necessary imports / components for the page */
 import { PageLayout, Text, List, Image, LinkTo, Seperator, Slider } from "../../src/components";
 import {ImageSize} from "../../src/shared/enums";
+import {width} from "dom7";
 
 const Article = () => {
     return (
@@ -14,8 +15,8 @@ const Article = () => {
                 The knowledge graph clarifies complex data relationships, thereby enabling in-depth analysis of the causes of accidents and the formulation of preventive strategies.
                 The study's key findings demonstrate the knowledge graph's ability to visualize semantic relationships, enhance decision-making efficiency, and enhance construction site safety by reducing accident frequency.
             </p>
-            <div className='Infra Forum' style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap:'20px'}}>
-                <Image src='/public/images/paperIMG/Alluvial Diagram.png' alt='Alluvial Diagram' size={ImageSize.MEDIUM}/>
+            <div className='Infra Forum' style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', gap:'20px'}}>
+                <img src='/images/paperIMG/Alluvial Diagram.png' alt='Alluvial Diagram' style={{ maxWidth:'85%'}}/>
             </div>
             <div className="px-4 py-3 dark:bg-slate-900 bg-blue-200 rounded mt-5 !text-lg leading-relaxed">
                 <a href="https://www.ksarc.or.kr/publication/p-journal/detail/?master-check=&chk=33738&master-check=" target="_blank" rel="noopener noreferrer"><u><i>[한국건설자동화∙로보틱스학회] Journal of Construction Automation and Robotics, Vol.3 No.2(2024-06)</i></u></a><br />
