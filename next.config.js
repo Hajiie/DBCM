@@ -16,7 +16,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
     loader: "akamai",
-    path: "",
+    path: "DBCM",
   }
 };
 

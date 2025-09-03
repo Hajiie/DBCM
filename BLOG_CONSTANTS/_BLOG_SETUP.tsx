@@ -80,8 +80,8 @@ export const PRIMARY_NAV: iNavSetup = {
     // },
     logo: {
         type: LogoType.IMAGE,
-        logo: '/images/DBCM_logo.png',
-        logoLight: '/images/DBCM_logo.png',
+        logo: '/public/images/DBCM_logo.png',
+        logoLight: '/public/images/DBCM_logo.png',
     },
     // navLinks are the main navbar links that apper on top of every page
     navLinks: [
