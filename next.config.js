@@ -7,7 +7,6 @@ const assetPrefix = isProd ? `/${repo}/` : '';
 const basePath = isProd ? `/${repo}` : '';
 
 const nextConfig = {
-  output: 'export',
   assetPrefix: assetPrefix,
   basePath: basePath,
 

@@ -99,8 +99,8 @@ const NavSidebar = ({ openSidebar = false, closeNavSidebar, navSetup, changeThem
                     {
                         navSetup.socials && <>
                             <p className='font-light'>Follow us : </p> {
-                                navSetup.socials.map((each: iNavSocials) => (
-                                    <a href={each.link} key={each.link} target="_blank" rel="noopener noreferrer" className='text-[28px] inline-block mr-5 mt-2'>{each.icon}</a>
+                                navSetup.socials.map((each: iNavSocials, i) => (
+                                    <a href={each.link} key={i} target="_blank" rel="noopener noreferrer" className='text-[28px] inline-block mr-5 mt-2'>{each.icon}</a>
                                 ))
                             }
                             <hr className='mt-5' />
