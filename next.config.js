@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 
-// const isProd = process.env.NODE_ENV === 'production';
+const isProd = process.env.NODE_ENV === 'production';
 const repo = 'DBCM';
 
-const assetPrefix = `/${repo}/`;
-const basePath = `/${repo}`;
+const assetPrefix = isProd? `/${repo}/` : '';
+const basePath = isProd ? `/${repo}` : '';
 
 const nextConfig = {
   assetPrefix: assetPrefix,
@@ -16,7 +16,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
     loader: "akamai",
-    path: "DBCM",
+    path: "",
   }
 };
 
