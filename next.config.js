@@ -15,8 +15,8 @@ const nextConfig = {
   // productionBrowserSourceMaps: true,
   images: {
     unoptimized: true,
-    // loader: "akamai",
-    // path: "",
+    loader: "akamai",
+    path: "",
   }
 };
 
