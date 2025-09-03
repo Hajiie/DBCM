@@ -223,7 +223,7 @@ const ARTICLES_LIST: iArticle[] = [
       articleTitle: "미래국토인프라 포럼",
       shortIntro: "2024. 08. 28 대한토목학회와 함께 운영된 ‘미래국토인프라 포럼’ 의 공개좌담회에 안승준 교수가 참여 하였습니다.",
       tags: "News",
-      thumbnail: "/public/images/2508News2.png",
+      thumbnail: "/images/2508News2.png",
       category: 'News'
     },
     seo: {
@@ -231,7 +231,7 @@ const ARTICLES_LIST: iArticle[] = [
       description:
           "2024. 08. 28 대한토목학회와 함께 운영된 ‘미래국토인프라 포럼’ 의 공개좌담회에 안승준 교수가 참여 하였습니다. 포럼은 도로, 철도, 하천 댐, 항만, 플랜트를 국토개발 차원에서 통합적으로 볼 컨트롤타워 설립을 주장했습니다.",
       keywords: "News, DBCM, National Infrastructure Innovation Forum",
-      ogImage: "/public/images/2508News2.png",
+      ogImage: "/images/2508News2.png",
     }
   },
   {
@@ -244,7 +244,7 @@ const ARTICLES_LIST: iArticle[] = [
       articleTitle: "2024년 6월 불가리아 KSP 최종보고회 및 고위정책대화",
       shortIntro: "2023. 06. 03 ~ 2024. 06. 07 불가리아 프로젝트 최종보고회",
       tags: "News",
-      thumbnail: "/public/images/2406News2.png",
+      thumbnail: "/images/2406News2.png",
       category: 'News'
     },
     seo: {
@@ -252,7 +252,7 @@ const ARTICLES_LIST: iArticle[] = [
       description:
           "2023. 06. 03 ~ 2024. 06. 07 불가리아 프로젝트 최종보고회",
       keywords: "News, DBCM, Bulgaria Project",
-      ogImage: "/public/images/2406News2.png",
+      ogImage: "/images/2406News2.png",
     }
   },
   {
@@ -265,7 +265,7 @@ const ARTICLES_LIST: iArticle[] = [
       articleTitle: "건설 사고사례 데이터 기반 지식그래프 구축 및 분석: 한국 CSI 데이터베이스 사례",
       shortIntro: "Construction Accident Case Data-Based Knowledge Graph Construction and analysis: A Case of Korean CSI Database",
       tags: "Paper",
-      thumbnail: "/public/images/paperIMG/Alluvial Diagram.png",
+      thumbnail: "/images/paperIMG/Alluvial Diagram.png",
       category: 'Paper'
     },
     seo: {
@@ -273,7 +273,7 @@ const ARTICLES_LIST: iArticle[] = [
       description:
           "Construction Accident Case Data-Based Knowledge Graph Construction and analysis: A Case of Korean CSI Database",
       keywords: "News, DBCM, Bulgaria Project",
-      ogImage: "/public/images/paperIMG/Alluvial Diagram.png",
+      ogImage: "/images/paperIMG/Alluvial Diagram.png",
     }
   },
 ];

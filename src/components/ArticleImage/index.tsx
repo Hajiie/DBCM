@@ -1,10 +1,8 @@
 import classes from './Images.module.scss';
 import { ImageSize } from "../../shared/enums"
 import { combineClasses, transformImagePaths } from '../../utils/utils';
-// import Zoom from 'react-medium-image-zoom'
-import dynamic from "next/dynamic";
+import Zoom from 'react-medium-image-zoom'
 
-const Zoom = dynamic(() => import('react-medium-image-zoom'), {ssr:false});
 
 interface IArticleImage {
     src: string,
