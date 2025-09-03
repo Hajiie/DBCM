@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 
-const isProd = process.env.NODE_ENV === 'production';
+// const isProd = process.env.NODE_ENV === 'production';
 const repo = 'DBCM';
 
-const assetPrefix = isProd ? `/${repo}/` : '';
-const basePath = isProd ? `/${repo}` : '';
+const assetPrefix = `/${repo}/`;
+const basePath = `/${repo}`;
 
 const nextConfig = {
   assetPrefix: assetPrefix,
@@ -14,9 +14,9 @@ const nextConfig = {
   trailingSlash: true,
   // productionBrowserSourceMaps: true,
   images: {
-    // unoptimized: true,
-    loader: "akamai",
-    path: "",
+    unoptimized: true,
+    // loader: "akamai",
+    // path: "",
   }
 };
 
