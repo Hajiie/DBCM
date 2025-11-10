@@ -3,9 +3,7 @@ import { IAuthor, iNavSetup, iSEO } from "../src/shared/interfaces";
 import {
     AiFillGithub,
     AiOutlineTwitter,
-    AiFillLinkedin,
     AiFillInstagram,
-    AiFillFacebook,
     AiFillSmile
 } from "react-icons/ai";
 
@@ -96,6 +94,10 @@ export const PRIMARY_NAV: iNavSetup = {
             path: ''
         },
         {
+            label: 'Members',
+            path: '/members'
+        },
+        {
             label: 'About Us',
             path: '/about-us'
         },
@@ -120,6 +122,10 @@ export const PRIMARY_NAV: iNavSetup = {
             label: 'Blog',
             type: 'dropdown',
             path: ''
+        },
+        {
+            label: 'Members',
+            path: '/members'
         },
         {
             label: 'About Us',
