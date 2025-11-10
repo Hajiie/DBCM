@@ -240,7 +240,7 @@ const Members = () => {
                     </div>
                     <div className="flex items-start">
                         <div className="mr-20 block md:w-[15%] w-[50%]">
-                            <Image src="/images/members_img/Jungwon.png" alt="Jungwon" className="rounded-lg overflow-hidden" />
+                            <Image src="/images/members_img/Junhyun.png" alt="Junhyun" className="rounded-lg overflow-hidden" />
                         </div>
                         <div className="">
                             <Text subtitle className='ml-4 dark:text-black'>
