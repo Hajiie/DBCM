@@ -1,5 +1,6 @@
 import { IAuthor } from "../../shared/interfaces";
 import { combineClasses } from "../../utils/utils";
+import LinkTo from "../LinkTo";
 
 const Avatar = ({ author, className }: { author: IAuthor, className?: string }) => {
   return (
@@ -19,3 +20,12 @@ const Avatar = ({ author, className }: { author: IAuthor, className?: string }) 
 };
 
 export default Avatar;
+
+export function ArticleAuthorLink({ author }: { author: IAuthor }) {
+  return (
+    <LinkTo href={"/blog?author=" + encodeURIComponent(author.name)} className="flex items-center text-sm font-medium">
+      <Avatar author={author} className="mr-2 h-8 w-8 text-base" />
+      {author.name}
+    </LinkTo>
+  );
+}

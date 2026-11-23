@@ -3,7 +3,7 @@ import { transformImagePaths } from "../../utils/utils";
 import LinkTo from "../LinkTo";
 import ArticleCardCategory from "../Misc/ArticleCardCategory";
 import ArticleTags from "../Misc/ArticleTags";
-import Avatar from "../Misc/Avatar";
+import { ArticleAuthorLink } from "../Misc/Avatar";
 import classes from "./ArticleCard.module.scss";
 
 export default function ArticleCard({ article, path }: { article: IArticleHeaderData; path: string }) {
@@ -24,10 +24,7 @@ export default function ArticleCard({ article, path }: { article: IArticleHeader
           </div>
         </div>
         <div className="flex flex-wrap items-center justify-between gap-3 p-4">
-          <LinkTo href={"/blog?author=" + encodeURIComponent(article.author.name)} className="flex items-center text-sm font-medium">
-            <Avatar author={article.author} className="mr-2 h-8 w-8 text-base" />
-            {article.author.name}
-          </LinkTo>
+          <ArticleAuthorLink author={article.author} />
           <ArticleCardCategory category={article.category} />
         </div>
       </article>
