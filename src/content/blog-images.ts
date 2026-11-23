@@ -19,7 +19,28 @@ export function imageExtension(type: unknown) {
   return typeof type === "string" ? imageExtensions.get(type) : undefined;
 }
 
+export function blogPhotoName(filename: string) {
+  return Array.from(filename.trim()).slice(0, 80).join("") || "Photo";
+}
+
 export function blogImageUrl(path: string) {
   const origin = process.env.NEXT_PUBLIC_SUPABASE_URL?.replace(/\/+$/, "");
   return origin ? `${origin}/storage/v1/object/public/${BLOG_IMAGE_BUCKET}/${path}` : undefined;
+}
+
+export const BLOG_INLINE_IMAGE_PREFIX = "/blog-images/";
+
+export function insertBlogPhotos(body: string, cursor: number, photos: BlogPhoto[]) {
+  if (!photos.length) return { body, cursor };
+
+  const before = body.slice(0, cursor);
+  const after = body.slice(cursor);
+  const images = photos.map(({ name, path }) => {
+    const alt = name.replace(/\s+/g, " ").replace(/[\\[\]]/g, "\\$&");
+    return `![${alt}](${BLOG_INLINE_IMAGE_PREFIX}${path})`;
+  }).join("\n\n");
+  const opening = !before || before.endsWith("\n\n") ? "" : before.endsWith("\n") ? "\n" : "\n\n";
+  const closing = after.startsWith("\n\n") ? "" : after.startsWith("\n") ? "\n" : "\n\n";
+  const start = before + opening + images;
+  return { body: start + closing + after, cursor: start.length + 2 };
 }

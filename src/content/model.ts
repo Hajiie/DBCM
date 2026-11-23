@@ -1,6 +1,8 @@
 import type { iArticle } from "../shared/interfaces";
 import { blogImageUrl, type BlogPhoto } from "./blog-images";
 
+export const MAX_ARTICLE_BODY_LENGTH = 40_000;
+
 export const categories = ["News", "Paper", "Research", "Events"] as const;
 export const memberGroups = ["Professor", "Researchers", "Alumni"] as const;
 export const sections = ["articles", "members", "about"] as const;

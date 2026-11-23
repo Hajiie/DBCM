@@ -1,6 +1,6 @@
 import { useState, type ChangeEvent } from "react";
 import {
-  BLOG_IMAGE_BUCKET, blogImageAccept, imageExtension, MAX_BLOG_IMAGE_BYTES, type BlogPhoto,
+  BLOG_IMAGE_BUCKET, blogImageAccept, blogPhotoName, imageExtension, MAX_BLOG_IMAGE_BYTES, type BlogPhoto,
 } from "../../content/blog-images";
 import { postJson, requestError } from "./request";
 
@@ -18,13 +18,14 @@ async function uploadBlogImage(file: File): Promise<BlogPhoto> {
   const client = createClient(origin, key, { auth: { persistSession: false, autoRefreshToken: false } });
   const { error } = await client.storage.from(BLOG_IMAGE_BUCKET).uploadToSignedUrl(path, token, file, { contentType: file.type });
   if (error) throw new Error("The photo could not be uploaded. Please try again.");
-  return { path, name: Array.from(file.name.trim()).slice(0, 80).join("") || "Photo" };
+  return { path, name: blogPhotoName(file.name) };
 }
 
-export default function BlogImagePicker({ label, remaining, multiple = false, onUploaded, onBusy }: {
+export default function BlogImagePicker({ label, remaining, multiple = false, beforeUpload, onUploaded, onBusy }: {
   label: string;
   remaining: number;
   multiple?: boolean;
+  beforeUpload?: (files: File[]) => string | undefined;
   onUploaded: (photos: BlogPhoto[]) => void;
   onBusy: (busy: boolean) => void;
 }) {
@@ -38,6 +39,12 @@ export default function BlogImagePicker({ label, remaining, multiple = false, on
     setErrors([]);
     if (files.length > remaining) {
       setErrors([`You can add ${remaining} more ${remaining === 1 ? "photo" : "photos"}.`]);
+      return;
+    }
+
+    const selectionError = beforeUpload?.(files);
+    if (selectionError) {
+      setErrors([selectionError]);
       return;
     }
 

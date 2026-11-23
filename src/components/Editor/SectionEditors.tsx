@@ -1,6 +1,6 @@
-import { useState, type ReactNode } from "react";
-import { articleCover, articlePath, categories, memberGroups, type About, type Article, type Member } from "../../content/model";
-import { blogImageUrl, MAX_BLOG_PHOTOS } from "../../content/blog-images";
+import { useEffect, useRef, useState, type ReactNode, type Ref } from "react";
+import { articleCover, articlePath, categories, memberGroups, MAX_ARTICLE_BODY_LENGTH, type About, type Article, type Member } from "../../content/model";
+import { blogImageUrl, blogPhotoName, imageExtension, insertBlogPhotos, MAX_BLOG_IMAGE_BYTES, MAX_BLOG_PHOTOS } from "../../content/blog-images";
 import ContentMarkdown from "../ContentMarkdown";
 import BlogImagePicker from "./BlogImagePicker";
 import { primaryButton, secondaryButton, SelectField, TextField } from "./Fields";
@@ -40,17 +40,20 @@ function CollectionEditor<T extends string | number>({ entries, selected, onSele
   );
 }
 
-function MarkdownField({ label, value, onChange, maxLength, required }: {
+function MarkdownField({ label, value, onChange, maxLength, required, textareaRef, children }: {
   label: string;
   value: string;
   onChange: (value: string) => void;
   maxLength: number;
   required?: boolean;
+  textareaRef?: Ref<HTMLTextAreaElement>;
+  children?: ReactNode;
 }) {
   return (
     <div>
-      <TextField label={label} value={value} onChange={onChange} rows={10} maxLength={maxLength} required={required} />
+      <TextField label={label} value={value} onChange={onChange} rows={10} maxLength={maxLength} required={required} textareaRef={textareaRef} />
       <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">Markdown supports headings, lists, links and images.</p>
+      {children}
       {value && (
         <details className="mt-3 rounded-lg border border-slate-200 p-3 dark:border-slate-600">
           <summary className="cursor-pointer text-sm font-semibold">Preview</summary>
@@ -68,11 +71,23 @@ export function ArticlesEditor({ data, published, onChange, onUploadBusy }: {
   onUploadBusy: (busy: boolean) => void;
 }) {
   const [selected, select] = useState(0);
+  const bodyInput = useRef<HTMLTextAreaElement>(null);
+  const insertAt = useRef(0);
+  const restoreCaret = useRef<number | null>(null);
   const article = data[selected];
   const photos = article?.photos ?? [];
   const cover = article && articleCover(article);
   const original = article && published.find((entry) => articlePath(entry) === articlePath(article));
   const update = (patch: Partial<Article>) => onChange(data.map((entry, index) => index === selected ? { ...entry, ...patch } : entry));
+
+  useEffect(() => {
+    const input = bodyInput.current;
+    const position = restoreCaret.current;
+    if (!input || position === null) return;
+    input.focus();
+    input.setSelectionRange(position, position);
+    restoreCaret.current = null;
+  }, [article?.body]);
 
   function add() {
     const today = new Date();
@@ -120,7 +135,29 @@ export function ArticlesEditor({ data, published, onChange, onUploadBusy }: {
             <input type="checkbox" checked={article.featured} onChange={(event) => update({ featured: event.currentTarget.checked })} />
             Feature on the homepage
           </label>
-          <MarkdownField label="Article body" value={article.body} onChange={(body) => update({ body })} maxLength={40000} required />
+          <MarkdownField label="Article body" value={article.body} onChange={(body) => update({ body })}
+            maxLength={MAX_ARTICLE_BODY_LENGTH} textareaRef={bodyInput} required>
+            <div className="mt-3 rounded-lg border border-slate-200 p-3 dark:border-slate-600">
+              <p className="mb-2 text-sm text-slate-600 dark:text-slate-300">Place the cursor in the body where you want the photos to appear.</p>
+              <BlogImagePicker key={`inline-${selected}`} label="Insert photos at cursor" multiple remaining={MAX_BLOG_PHOTOS}
+                onBusy={onUploadBusy}
+                beforeUpload={(files) => {
+                  insertAt.current = bodyInput.current?.selectionEnd ?? article.body.length;
+                  const candidates = files.flatMap((file) => {
+                    const extension = imageExtension(file.type);
+                    if (!extension || file.size < 1 || file.size > MAX_BLOG_IMAGE_BYTES) return [];
+                    return [{ path: `00000000-0000-0000-0000-000000000000.${extension}`, name: blogPhotoName(file.name) }];
+                  });
+                  const { body } = insertBlogPhotos(article.body, insertAt.current, candidates);
+                  if (body.length > MAX_ARTICLE_BODY_LENGTH) return "Shorten the article body before inserting photos.";
+                }}
+                onUploaded={(uploaded) => {
+                  const inserted = insertBlogPhotos(article.body, insertAt.current, uploaded);
+                  restoreCaret.current = inserted.cursor;
+                  update({ body: inserted.body });
+                }} />
+            </div>
+          </MarkdownField>
           <section className="space-y-3 rounded-lg border border-slate-200 p-4 dark:border-slate-600" aria-label="Attached photos">
             <BlogImagePicker key={`photos-${selected}`} label="Attach photos" remaining={MAX_BLOG_PHOTOS - photos.length} multiple onBusy={onUploadBusy}
               onUploaded={(uploaded) => update({ photos: [...photos, ...uploaded] })} />

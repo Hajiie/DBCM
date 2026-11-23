@@ -1,5 +1,5 @@
 import { blogImagePath, MAX_BLOG_PHOTOS } from "../content/blog-images";
-import { categories, memberGroups, type Content, type Section } from "../content/model";
+import { categories, memberGroups, MAX_ARTICLE_BODY_LENGTH, type Content, type Section } from "../content/model";
 
 export class ContentError extends Error {}
 
@@ -71,7 +71,7 @@ const validators: { [K in Section]: (value: unknown) => Content[K] } = {
         ...(coverPhoto && { coverPhoto }),
         title: field(data.title, "article title", 240),
         summary: field(data.summary, "summary", 600),
-        body: field(data.body, "article body", 40_000),
+        body: field(data.body, "article body", MAX_ARTICLE_BODY_LENGTH),
         author: field(data.author, "author", 120),
         category: choice(data.category, categories, "category"),
         tags: field(data.tags, "tags", 240, false),
