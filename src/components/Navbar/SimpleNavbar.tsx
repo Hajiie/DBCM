@@ -1,6 +1,6 @@
 import classes from "./Navbar.module.scss";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { combineClasses, transformImagePaths } from "../../utils/utils";
 import { LogoType, THEMES } from "../../shared/enums";
 import LinkTo from "../LinkTo";
@@ -14,23 +14,23 @@ import { iNavbar, iNavLink, iNavSocials } from "../../shared/interfaces";
 const SimpleNavbar = ({ openSearch, changeTheme, toggleSideMenu, openSidebar = false, navSetup, onShareClick }: iNavbar) => {
   const { navLinks, socials, logo } = navSetup;
   const [openDD, setOpenDD] = useState(false)
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme } = useTheme();
 
   return (
     <div className={combineClasses(classes.navbar__container, 'container flex items-center justify-between', "px-2")}>
       <div className="flex items-center">
-        <div
+        <button type="button" aria-label="Open navigation menu" aria-expanded={openSidebar}
           className={combineClasses(classes.mobileBurgerToggle, "mr-5", openSidebar ? classes.mobileBurgerToggle__close : ' ')}
           onClick={() => toggleSideMenu()}>
           <AiOutlineMenu className="dark:text-white text-black text-2xl" />
-        </div>
-        <Link href="/" passHref>
+        </button>
+        <Link href="/" aria-label="DBCM Lab home">
           {
             logo ?
               logo.type === LogoType.IMAGE ?
-                <img src={theme === THEMES.DARK ? transformImagePaths(logo.logoLight) : transformImagePaths(logo.logo)} alt="WebExpe" className="cursor-pointer" width="50px" /> :
-                <a className='text-[22px] font-semibold'>{logo.logo}</a>
-              : <a className='text-[22px] font-semibold'>Logo</a>
+                <img src={resolvedTheme === THEMES.DARK ? transformImagePaths(logo.logoLight) : transformImagePaths(logo.logo)} alt="DBCM Lab" className="cursor-pointer" width={50} /> :
+                <span className='text-[22px] font-semibold'>{logo.logo}</span>
+              : <span className='text-[22px] font-semibold'>DBCM Lab</span>
           }
         </Link>
       </div>
@@ -63,6 +63,7 @@ const SimpleNavbar = ({ openSearch, changeTheme, toggleSideMenu, openSidebar = f
         </div>
 
 
+        <a href="/editor/" className="whitespace-nowrap text-sm font-medium">Member portal</a>
         <div className={combineClasses(classes.search_icon_wrapper, 'ml-5 dark:text-white')} onClick={() => openSearch()}>
           <button name="search-button" aria-label="search button">
             <AiOutlineSearch className="dark:text-white text-black text-[22px]" />
@@ -77,9 +78,8 @@ const SimpleNavbar = ({ openSearch, changeTheme, toggleSideMenu, openSidebar = f
 
 
         <button name="theme-switch" aria-label="theme button" className={combineClasses(classes.theme_switch, "pl-3 dark:text-white text-black")} onClick={changeTheme}>
-          {
-            theme && theme === 'dark' ? <BsFillSunFill className="text-2xl" /> : <BsFillMoonFill className="text-md " />
-          }
+          <BsFillMoonFill className="dark:hidden" />
+          <BsFillSunFill className="hidden text-2xl dark:block" />
         </button>
       </div>
     </div>

@@ -1,0 +1,41 @@
+[
+  {
+    "route": "blog",
+    "slug": "Infra_Forum",
+    "date": "2024-08-28",
+    "title": "미래국토인프라 포럼",
+    "summary": "2024. 08. 28 대한토목학회와 함께 운영된 ‘미래국토인프라 포럼’ 의 공개좌담회에 안승준 교수가 참여 하였습니다.",
+    "image": "/images/2508News2.png",
+    "category": "News",
+    "featured": true,
+    "author": "Sunghee Lee",
+    "tags": "News",
+    "body": "2024. 08. 28 대한토목학회와 함께 운영된 ‘미래국토인프라 포럼’ 의 공개좌담회에 안승준 교수가 참여 하였습니다. 포럼은 도로, 철도, 하천 댐, 항만, 플랜트를 국토개발 차원에서 통합적으로 볼 컨트롤타워 설립을 주장했습니다.\n\nOn August 28, 2024, at the National Infrastructure Innovation Forum organized in collaboration with the Korean Society of Civil Engineers, Prof. Ahn Seung-jun participated in the public discussion. The forum advocated for the establishment of a control tower to integrate road, rail, river dams, ports, and plants from a national development perspective.\n\n![미래국토인프라 포럼-1](</images/2508News1.jpg>)\n\n![미래국토인프라 포럼-2](</images/2508News2.png>)\n\n[[매일건설신문] 미래국인프라 혁신포럼 창립총회 및 기념세미나](https://www.mcnews.co.kr/82096)"
+  },
+  {
+    "route": "blog",
+    "slug": "Bulgaria_Project",
+    "date": "2024-06-07",
+    "title": "2024년 6월 불가리아 KSP 최종보고회 및 고위정책대화",
+    "summary": "2023. 06. 03 ~ 2024. 06. 07 불가리아 프로젝트 최종보고회",
+    "image": "/images/2406News2.png",
+    "category": "News",
+    "featured": true,
+    "author": "Sunghee Lee",
+    "tags": "News",
+    "body": "2023/24년 불가리아 KSP 최종보고회 및 고위정책대화에서 안승준 교수가 불가리아 정부 및 유관기관 관계자들에게 주제별 최종 연구내용을 발표하고 정책제언이 반영될 수 있도록 사업의 결과를 확산하였다.\n\nFrom June 03, 2024, to June 07, 2024, At the Bulgarian KSP Final Report and High-level Policy Dialogue in 2023/24, Prof. Ahn presented the final findings of the thematic research to the Bulgarian government and related organizations and disseminated the project's findings for policy recommendations.\n\n![불가리아 프로젝트-1](</images/2406News1.png>)\n\n![불가리아 프로젝트-2](</images/2406News2.png>)"
+  },
+  {
+    "route": "paper",
+    "slug": "AccidentCase_KSARC",
+    "date": "2024-06-20",
+    "title": "건설 사고사례 데이터 기반 지식그래프 구축 및 분석: 한국 CSI 데이터베이스 사례",
+    "summary": "Construction Accident Case Data-Based Knowledge Graph Construction and analysis: A Case of Korean CSI Database",
+    "image": "/images/paperIMG/Alluvial Diagram.png",
+    "category": "Paper",
+    "featured": false,
+    "author": "Sunghee Lee",
+    "tags": "Paper",
+    "body": "The objective of this study is to construct and analyze a knowledge graph based on construction accident case data with the aim of enhancing the efficiency of information exploration and analysis. By meticulously organizing and graphically representing accident case data, the study devises a methodology for automated knowledge graph construction employing cutting-edge Al models and tools. The research automates data processing to handle the increasing data volume, with 23,877 accident cases from the Construction Safety Information (CSI) system. The knowledge graph clarifies complex data relationships, thereby enabling in-depth analysis of the causes of accidents and the formulation of preventive strategies. The study's key findings demonstrate the knowledge graph's ability to visualize semantic relationships, enhance decision-making efficiency, and enhance construction site safety by reducing accident frequency.\n\n![Alluvial Diagram](</images/paperIMG/Alluvial Diagram.png>)\n\n[[한국건설자동화∙로보틱스학회] Journal of Construction Automation and Robotics, Vol.3 No.2(2024-06)](https://www.ksarc.or.kr/publication/p-journal/detail/?master-check=&chk=33738&master-check=)\n\n[[한국건설자동화∙로보틱스학회] 건설 사고사례 데이터 기반 지식그래프 구축 및 분석: 한국 CSI 데이터베이스 사례](https://www.jcar.or.kr/articles/article/dPyD/#Information)"
+  }
+]

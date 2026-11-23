@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { THEMES } from '../../shared/enums';
-import { addBodyNoScroll, combineClasses, getCategories, removeBodyNoScroll } from '../../utils/utils';
+import { addBodyNoScroll, combineClasses, removeBodyNoScroll } from '../../utils/utils';
 import classes from './Navbar.module.scss';
 import { Text, LinkTo } from '../../components';
 import { useTheme } from 'next-themes';
@@ -30,12 +30,11 @@ const NavSidebar = ({ openSidebar = false, closeNavSidebar, navSetup, changeThem
 
     const env = process.env.NODE_ENV;
     const [openDD, setOpenDD] = useState(false)
+    if (!openSidebar) return null;
 
     return (
         <>
-            {openSidebar ? (
-                <div className="backdrop" onClick={closeNavSidebar}></div>
-            ) : null}
+            <div className="backdrop" onClick={closeNavSidebar}></div>
 
             <aside className={combineClasses(classes.nav_sidebar_wrapper, openSidebar && classes.open, 'dark:bg-slate-900 dark:text-white bg-white text-black')}>
                 <div className='flex items-center justify-between pb-3' onClick={closeNavSidebar}>
@@ -44,6 +43,7 @@ const NavSidebar = ({ openSidebar = false, closeNavSidebar, navSetup, changeThem
                 </div>
                 <hr />
                 <div className='my-15'>
+                    <a href="/editor/" className="my-3 block text-base font-semibold">Member portal</a>
                     {
                         navSetup.sideNavLinks.map((each: iNavLink, i: any) => (
                             each.type !== 'dropdown' ? !each.newTab ?

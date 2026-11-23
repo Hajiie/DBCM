@@ -1,13 +1,13 @@
 import classes from './PageLayout.module.scss';
 import { combineClasses, getArticleDetails, transformImagePaths, transformPath } from '../../utils/utils';
-import { SORTED_ARTICLES_BY_DATE } from '../../../BLOG_CONSTANTS/_ARTICLES_LIST';
+import { MOCK_ARTICLES_LIST } from '../../constants/mocks';
 import ArticleHeader from '../../components/ArticleHeader';
 import ArticleMoreFromAuthor from '../../components/Misc/ArticleMoreFromAuthor';
 
 const WithSidebar = ({ children, ads }: {children: any, ads?: string[]}) => {
     const ARTICLE_DETAILS = getArticleDetails();
     const author = ARTICLE_DETAILS?.preview?.author;
-    const relatedArticles = author ? SORTED_ARTICLES_BY_DATE.filter((each) => each.preview.author === author) : [];
+    const relatedArticles = author ? MOCK_ARTICLES_LIST.filter((each) => each !== ARTICLE_DETAILS && each.preview.author === author) : [];
 
     return (
         <>

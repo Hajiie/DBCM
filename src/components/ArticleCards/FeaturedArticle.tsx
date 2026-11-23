@@ -22,7 +22,7 @@ const FeaturedArticle = ({ article, path }: IProp) => {
                         <div className={"flex items-center"}>
                             <Avatar author={article.author} className="w-[50px] h-[50px] mr-3 text-xl" />
                             <LinkTo 
-                                href={"/blog?author=" + article.author.name} 
+                                href={"/blog?author=" + encodeURIComponent(article.author.name)}
                                 passHref 
                                 className={combineClasses(classes.author_name, 'text-[14px] md:text-[16px] my-0 font-medium')}>
                                 {article.author.name}
@@ -47,7 +47,7 @@ const FeaturedArticle = ({ article, path }: IProp) => {
                 <div className={combineClasses(classes.featured_article__image, 'rounded-sm overflow-hidden')} >
                     {/* style={{ background: `url(${transformImagePaths(article.thumbnail)})` }} */}
                     <img
-                        src={transformImagePaths(article.thumbnail)} alt={article.articleTitle}
+                        src={transformImagePaths(article.thumbnail)} alt={article.articleTitle} loading="lazy" referrerPolicy="no-referrer"
                         className="w-full h-full object-cover" />
                 </div>
             </div>

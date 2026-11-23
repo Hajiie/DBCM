@@ -65,7 +65,7 @@ const ArticleMoreFromAuthor = ({
           </p>
           <div className={articleGrid ? "flex flex-wrap" : ""}>
             {relatedArticles.slice(0, 3).map((each, i) => (
-              <Link href={transformPath(each.path)} key={i} passHref>
+              <Link href={transformPath(each.path)} key={i}>
                 <div
                   className={combineClasses(
                     "mb-3 cursor-pointer",

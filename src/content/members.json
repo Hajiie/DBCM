@@ -1,0 +1,82 @@
+[
+  {
+    "id": "professor",
+    "group": "Professor",
+    "name": "안승준 · Seungjun (Jun) Ahn, PhD",
+    "tenure": "",
+    "image": "/images/members_img/professor.png",
+    "bio": "부교수 | 공학박사 · Associate Professor  \n홍익대학교 건설환경공학과  \nDepartment of Civil and Environmental Engineering, Hongik University\n\n04066 서울특별시 마포구 와우산로 94, 제2공학관(P동) 817호  \nP817, 94 Wausanro, Mapo-gu, Seoul, 04066, Republic of Korea  \n연구실 전화: [02-320-1621](tel:02-320-1621) · [+82-2-320-1621](tel:+82-2-320-1621)  \n이메일: [jun.ahn@hongik.ac.kr](mailto:jun.ahn@hongik.ac.kr)\n\n#### 경력\n\n- 2025/02/27 ~ 현재 · 홍익대학교 건설환경공학과 부교수\n- 2021/09/01 ~ 2025/02/27 · 홍익대학교 건설환경공학과 조교수\n- 2021/01/01 ~ 2021/08/31 · University of South Australia Senior Lecturer\n- 2016/07/11 ~ 2020/12/31 · University of South Australia Lecturer\n- 2014/10/15 ~ 2016/04/30 · University of Alberta Postdoc\n- 2010/03/23 ~ 2010/06/17 · 건설산업연구원 연구원"
+  },
+  {
+    "id": "felix",
+    "group": "Researchers",
+    "name": "Felix (Kong Fansheng)",
+    "tenure": "23년 2월 ~ ",
+    "image": "/images/members_img/Felix.png",
+    "bio": "홍익대학교 건설환경공학과 (박사 과정)  \nDepartment of Civil and Environmental Engineering, Hongik University (Postgraduate Student)  \nEmail: [konfy004@gmail.com](mailto:konfy004@gmail.com)\n\n- 대심도 철도시설물 안전 대피 성능 시뮬레이션 모델 구축"
+  },
+  {
+    "id": "jungwon",
+    "group": "Researchers",
+    "name": "이중원 (Jungwon Lee)",
+    "tenure": "22년 7월 ~ ",
+    "image": "/images/members_img/Jungwon.png",
+    "bio": "홍익대학교 건설환경공학과 (석사 과정)  \nDepartment of Civil and Environmental Engineering, Hongik University (Masters Student)  \nEmail: [ok122800@gmail.com](mailto:ok122800@gmail.com)\n\n- 건설현장 안전관리 자동화를 위한 인지적 에이전트 시스템 개발\n- 건설기준 디지털 전환을 위한 건설기준 라이브러리 및 온톨로지 구축활용 기술개발 연구\n- 고속도로 지반시설물 정보체계표준화 및 BIM 모델링 가이드 수립 용역\n- 수상: 한국건설관리학회 2023년 정기학술발표대회 우수논문상"
+  },
+  {
+    "id": "jiwon",
+    "group": "Researchers",
+    "name": "정지원 (Jiwon Jeong)",
+    "tenure": "22년 1월 ~ ",
+    "image": "/images/members_img/Jiwon.png",
+    "bio": "홍익대학교 건설환경공학과 (석사 과정)  \nDepartment of Civil and Environmental Engineering, Hongik University (Masters Student)  \nEmail: [xxx03018@naver.com](mailto:xxx03018@naver.com)\n\n- 고속도로 노선 공용 전 교통위험도 추정을 위한 AI 기술 개발 및 검증\n- 대심도 철도시설물 안전 대피 성능 시뮬레이션 모델 구축\n- 건설현장 고소작업 인간-로봇 협업 기술 및 통합운영 시스템 개발\n- 수상: 한국건설관리학회 2022년 전국대학생 학술발표대회 논문부문 우수상\n- 수상: 한국건설관리학회 2023년 전국대학생 학술발표대회 논문부문 장려상\n- 수상: 토목학회 2023년 우수논문상"
+  },
+  {
+    "id": "yuri",
+    "group": "Researchers",
+    "name": "김유리 (Yuri Kim)",
+    "tenure": "25년 1월 ~ ",
+    "image": "/images/members_img/Yuri.png",
+    "bio": "홍익대학교 건설환경공학과 (석사 과정)  \nDepartment of Civil and Environmental Engineering, Hongik University (Masters Student)  \nEmail: [lfamousl@naver.com](mailto:lfamousl@naver.com)\n\n- 고속도로 지반시설물 정보체계표준화 및 BIM 모델링 가이드 수립 용역"
+  },
+  {
+    "id": "sunghee",
+    "group": "Researchers",
+    "name": "이성희 (Sunghee Lee)",
+    "tenure": "23년 7월 ~ ",
+    "image": "/images/members_img/Sunghee.png",
+    "bio": "홍익대학교 건설환경공학과 (학부 과정)  \nDepartment of Civil and Environmental Engineering, Hongik University (Undergraduate Student)  \nEmail: [dhqks507@gmail.com](mailto:dhqks507@gmail.com)\n\n- 건설기준 디지털 전환을 위한 건설기준 라이브러리 및 온톨로지 구축활용 기술개발 연구"
+  },
+  {
+    "id": "seungho",
+    "group": "Researchers",
+    "name": "최승호 (Seungho Choi)",
+    "tenure": "24년 6월 ~ ",
+    "image": "/images/members_img/Seungho.png",
+    "bio": "홍익대학교 건설환경공학과 (학사 과정)  \nDepartment of Civil and Environmental Engineering, Hongik University (Undergraduate Student)  \nEmail: [thomas.seungho@gmail.com](mailto:thomas.seungho@gmail.com)\n\n- 건설현장 고소작업 인간-로봇 협업 기술 및 통합운영 시스템 개발\n- 수상: 한국건설관리학회 2024년 전국대학생 학술발표대회 논문부문 장려상"
+  },
+  {
+    "id": "donghyun",
+    "group": "Researchers",
+    "name": "강동현 (Donghyun Kang)",
+    "tenure": "25년 1월 ~ ",
+    "image": "/images/members_img/Donghyun.png",
+    "bio": "홍익대학교 건설환경공학과 (학사 과정)  \nDepartment of Civil and Environmental Engineering, Hongik University (Undergraduate Student)  \nEmail: [kdong1228@gmail.com](mailto:kdong1228@gmail.com)\n\n- 고속도로 노선 공용 전 교통위험도 추정을 위한 AI 기술 개발 및 검증"
+  },
+  {
+    "id": "junhyun",
+    "group": "Researchers",
+    "name": "이준현 (Junhyun Lee)",
+    "tenure": "25년 1월 ~ ",
+    "image": "/images/members_img/Junhyun.png",
+    "bio": "홍익대학교 건설환경공학과 (학사 과정)  \nDepartment of Civil and Environmental Engineering, Hongik University (Undergraduate Student)  \nEmail: [leejunhyun6513@gmail.com](mailto:leejunhyun6513@gmail.com)\n\n- 건설현장 안전관리 자동화를 위한 인지적 에이전트 시스템 개발\n- 고속도로 지반시설물 정보체계표준화 및 BIM 모델링 가이드 수립 용역"
+  },
+  {
+    "id": "woohyuk",
+    "group": "Alumni",
+    "name": "김우혁 (Woohyuk Kim)",
+    "tenure": "22년 1월 ~ 22년 12월",
+    "image": "/images/members_img/Woohyuk.png",
+    "bio": "홍익대학교 건설환경공학과 (학사)  \nBachelor of Civil and Environmental Engineering, Hongik University  \nEmail: [zlddngur@naver.com](mailto:zlddngur@naver.com)\n\n現 도화엔지니어링\n\n- 수상: 한국건설관리학회 2022년 전국대학생 학술발표대회 논문부문 장려상"
+  }
+]

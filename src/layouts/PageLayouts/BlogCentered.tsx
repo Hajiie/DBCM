@@ -1,6 +1,6 @@
 import classes from './PageLayout.module.scss';
 import { combineClasses, getArticleDetails, transformImagePaths, transformPath } from '../../utils/utils';
-import { SORTED_ARTICLES_BY_DATE } from '../../../BLOG_CONSTANTS/_ARTICLES_LIST';
+import { MOCK_ARTICLES_LIST } from '../../constants/mocks';
 import Link from 'next/link';
 import Seperator from '../../components/Seperator';
 import ArticleHeader from '../../components/ArticleHeader';
@@ -9,8 +9,9 @@ import ArticleMoreFromAuthor from '../../components/Misc/ArticleMoreFromAuthor';
 
 const Centered = ({ children }: any) => {
     const ARTICLE_DETAILS = getArticleDetails();
+    if (!ARTICLE_DETAILS) return children;
     const author = ARTICLE_DETAILS.preview.author;
-    const relatedArticles = SORTED_ARTICLES_BY_DATE.filter((each) => each.preview.author === author);
+    const relatedArticles = MOCK_ARTICLES_LIST.filter((each) => each !== ARTICLE_DETAILS && each.preview.author === author);
 
     return (
         <section className={combineClasses(classes.centered_article_wrapper, 'dark:bg-slate-900 dark:text-white')}>

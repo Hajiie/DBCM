@@ -61,7 +61,7 @@ export const SUNGHEE: IAuthor = {
 
 // This can your company name / your name etc for SEO purposes
 export const WEBSITE_NAME: string = 'DBCM Lab';
-export const WEBSITE_URL: string = '/';
+export const WEBSITE_URL = process.env.NEXT_PUBLIC_SITE_URL || '';
 
 /**
  * This is the main navigation setup.
@@ -78,8 +78,8 @@ export const PRIMARY_NAV: iNavSetup = {
     // },
     logo: {
         type: LogoType.IMAGE,
-        logo: '/public/images/DBCM_logo.png',
-        logoLight: '/public/images/DBCM_logo.png',
+        logo: '/images/DBCM_logo.png',
+        logoLight: '/images/DBCM_logo.png',
     },
     // navLinks are the main navbar links that apper on top of every page
     navLinks: [
@@ -164,5 +164,5 @@ export const DEFAULT_SEO: iSEO = {
     url: WEBSITE_URL,
     author: `${DBCM.name}, ${SUNGHEE.name}`,
     twitterHandle: '',
-    ogImage: '/images/DBCM_logo.jpg'
+    ogImage: '/images/DBCM_logo.png'
 }

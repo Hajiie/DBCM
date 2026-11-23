@@ -63,7 +63,7 @@ const CenteredNavbar = ({
                     ? transformImagePaths(logo.logoLight)
                     : transformImagePaths(logo.logo)
                 }
-                alt="WebExpe"
+                alt="DBCM Lab"
                 className="cursor-pointer"
                 width="100px"
               />
@@ -126,6 +126,7 @@ const CenteredNavbar = ({
             />
           )
         )}
+        <a href="/editor/" className="mx-2 whitespace-nowrap text-sm font-medium">Member portal</a>
       </div>
     </div>
   );

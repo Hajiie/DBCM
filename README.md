@@ -1,66 +1,70 @@
-![blog-template-using-nextjs-typescript-tailwindcss](/public/images/og-image.jpg)
+# DBCM Lab
 
-# Starter blog template using Nextjs, Typescript and Tailwind CSS.
+홍익대학교 Data-based Construction Management Lab의 웹사이트입니다. 블로그, 논문, 멤버 프로필과 연구실 소개를 공개합니다. 승인된 멤버는 **Member portal**에서 콘텐츠를 편집할 수 있습니다.
 
-This is a [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/) blogging starter template. Probably the most feature-rich Next.js markdown blogging template out there. Comes out of the box configured with the latest technologies to make technical writing a breeze. Easily configurable and customizable. Perfect as a replacement to existing Jekyll and Hugo individual blogs.
+## Vercel과 Supabase 연결
 
-This is a starter blog template using [Next.js](https://nextjs.org/), [Typescript](https://www.typescriptlang.org/) and [Tailwind CSS](https://tailwindcss.com/), a feature-rich Next.js component based blogging template. This template is configured with the latest technologies and has many versatile component which allows you to write your article with ease and also provide some design customization. Easily to configure and setup and it is completely static so there is no need to setup a server just export the project to create static file and deploy it on any static site hosting service. A good replacement to existing heavy wordpress or blogger websites.
+1. 기존 Supabase 프로젝트의 **SQL Editor → New query**에서 [DBCM 마이그레이션](supabase/migrations/20261123000000_dbcm_portal.sql) 전체를 한 번 실행합니다. 사이트는 섹션을 처음 게시하기 전까지 저장소에 포함된 초기 콘텐츠를 표시합니다.
+2. Vercel의 **dbcm → Settings → Environment Variables**에 두 값을 `Config`로 등록합니다. Supabase 프로젝트의 **Connect** 화면에서 복사할 수 있습니다.
 
-Check out the [demo website](https://nextjs-simple-blog-template.web.app/) for all the required documentation to get started.
-Feel free to open a new issue if none has been posted previously.
-Feature request? feel free to start a new discussion thread. We are open for all ideas and suggestions!
+   | 변수 | 값 |
+   | --- | --- |
+   | `NEXT_PUBLIC_SUPABASE_URL` | Supabase Project URL |
+   | `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Supabase Publishable Key |
 
+3. Vercel Production에서 사용하는 주소가 다르거나 Vercel 시스템 환경 변수를 사용하지 않는다면 `DBCM_ORIGIN`에 실제 사이트 주소를 지정합니다. 현재 운영 주소는 `https://dbcm-lab.vercel.app`입니다.
+4. Supabase에 테스트 계정을 만들고 편집 권한을 등록한 뒤, Vercel Preview에서 로그인·게시·로그아웃을 확인합니다. Preview 환경 변수에는 검증용 Supabase 프로젝트나 브랜치의 값을 넣습니다.
+5. 검증된 코드를 `main`에 반영합니다. 이후 코드 변경은 Vercel이 배포하고, 콘텐츠 변경은 편집기에서 게시하면 공개 페이지에 반영됩니다.
 
-## Motivation
-We wanted to create and start a blog with as little investment as possible and the criteria was that it should be fast, static, easy to work on and no backend or server required, so we started working on a blog for ourself and in the middle we thought of making it in such a way that it is easy for others also including non techies to just simply download the code and start their own blog.
+## 멤버 계정과 권한
 
-We wanted to make it as feature rich as medium or dev.to, so we took some design ideas and inspirations from them and tried to make a template which suits our need and might help others too.
+운영자는 Supabase **Authentication → Users → Add user**에서 계정을 만들거나 기존 계정을 선택합니다. 사용자 UUID를 복사해 **SQL Editor**에서 편집 권한을 부여합니다.
 
-In this template we have used Next.js SSG to create static HTML files which can be hosted on firebase or any static site hosting service. There is also options like vercel for hosting Next.js dynamic webistes but we wanted this template to be easy to use for any non techie person too, so we explored the option of static site generation.
-
-
-## Examples
-- [demo website](https://nextjs-simple-blog-template.web.app/) - this template
-- [webexpe.com](https://webexpe.com/)
-
-If you are using the template it will be great if you create a PR and add your blog to this list in readme file. It will motivate us to create more such projects.
-
-## Features
-- Easy styling customization with [Tailwind CSS](https://tailwindcss.com/).
-- Near perfect lighthouse and page speed insights score.
-- Fully responsive and mobile friendly.
-- Light and dark theme.
-- Support for multiple authors.
-- Minimilistic Blog templates, Default and Centered Layout and Components. You can check all the list of components [here](https://nextjs-simple-blog-template.web.app/tutorial/all-components/).
-- Static site generation.
-- Google analytics support.
-- SEO friendly including metadata, Open Graph tags with Next SEO.
-
-## Requirements
-- Node.js
-- NPM
-- VS Code for editing and writing your articles.
-- Imp VS Code plugins:[Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense) , [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
-
-## Quick Start Guide
-1. Download /Install the template:
-2. Run npm install
-```bash
-npm install
+```sql
+insert into public.dbcm_editors (user_id)
+values ('여기에-사용자-UUID')
+on conflict do nothing;
 ```
-3. After installation is done run npm start
-```bash
+
+편집 권한을 회수하려면 해당 UUID를 지정해 다음 명령을 실행합니다.
+
+```sql
+delete from public.dbcm_editors
+where user_id = '여기에-사용자-UUID';
+```
+
+공개 멤버 프로필과 편집 계정은 별도로 관리됩니다. DBCM 전용 Supabase 프로젝트라면 Auth 설정에서 공개 가입을 끄세요. 여러 앱이 프로젝트를 공유한다면 기존 가입 설정을 유지하더라도 `dbcm_editors`에 등록된 계정만 DBCM을 수정할 수 있습니다.
+
+### 이메일 초대와 비밀번호 재설정
+
+DBCM 전용 프로젝트에서 초대 메일을 사용하려면 Supabase Auth의 **Site URL**을 운영 주소로 지정하고, **Email Templates**의 링크를 아래와 같이 설정합니다. 기존 Auth를 다른 앱과 공유하는 경우 해당 앱의 메일 설정을 확인한 뒤 변경하세요.
+
+```html
+<!-- Invite user -->
+<a href="{{ .SiteURL }}/account/confirm/?token_hash={{ .TokenHash }}&amp;type=invite">Accept DBCM invitation</a>
+
+<!-- Reset password -->
+<a href="{{ .SiteURL }}/account/confirm/?token_hash={{ .TokenHash }}&amp;type=recovery">Reset DBCM password</a>
+```
+
+운영용 초대·재설정 메일에는 [커스텀 SMTP](https://supabase.com/docs/guides/auth/auth-smtp)를 설정합니다. 초대 계정에도 SQL로 위 편집 권한을 등록합니다.
+
+## 로컬 실행
+
+Node.js 22.19 이상이 필요합니다. 로컬에서 연동을 검증하려면 위 환경 변수 두 개를 `.env.local`에 넣습니다. 테스트 DB에도 DBCM 마이그레이션을 적용하고 테스트 계정의 편집 권한을 등록합니다.
+
+```sh
+npm install
 npm start
 ```
-4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-5. Rest you can follow this article on [setting up your blog](https://nextjs-simple-blog-template.web.app/tutorial/how-to-setup-blog/).
 
-## Support
-This is an open source project and everyone is welcome to contribute. Feel free to open an issue, if you have any questions or incase you find a bug. Create your versions of this template and help the community, also if you are using our template a little credit will be much appreciated.
+환경 변수 없이 실행하면 공개 페이지에서 초기 콘텐츠를 확인할 수 있습니다. 편집기 로그인에는 Supabase 연결이 필요합니다.
 
-Created by **[Rupali Yadav](https://www.linkedin.com/in/rupali-yadav-087bb4112/)** and **[Mayur Nalwala](https://www.linkedin.com/in/mayur-nalwala/)** from [WebExpe](https://webexpe.com/) with ♥
+## 편집
 
-<a href="https://www.buymeacoffee.com/webexpe13z" target="_blank">![support us](/public/images/bmc.png)</a>
-## Licence
+- **Blog**에서 글과 논문을 편집하거나 글을 추가·삭제합니다. 카테고리, 대표 이미지, 작성일, 작성자와 홈페이지 추천 여부를 설정할 수 있습니다.
+- **Members**에서 교수, 연구원, 졸업생 프로필을 추가·수정·삭제합니다.
+- **About Us**에서 제목, 부제, 소개 본문을 편집합니다.
+- 본문에는 Markdown을 사용합니다. 이미지는 기존 `/images/…` 경로나 HTTPS URL을 사용합니다. **Publish changes**를 누르면 해당 섹션이 공개됩니다.
 
-[MIT](https://github.com/webexpe13/blog-template-using-nextjs-typescript-tailwindcss/blob/main/LICENSE) © [Web Expe](https://www.webexpe.com)
+기존 사이트 템플릿은 Web Expe의 [Next.js Simple Blog Template](https://github.com/webexpe13/blog-template-using-nextjs-typescript-tailwindcss)을 기반으로 합니다. [MIT 라이선스](LICENSE)를 따릅니다.

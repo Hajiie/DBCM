@@ -1,10 +1,11 @@
 import { BiChevronDown } from "react-icons/bi";
-import { combineClasses, getCategories } from "../../utils/utils";
+import { combineClasses } from "../../utils/utils";
 import LinkTo from "../LinkTo";
+import { categories } from "../../content/model";
 
 interface INavCatergoryDD {
   openDD: boolean;
-  setOpenDD: any;
+  setOpenDD: (open: boolean) => void;
   label: string;
   floating?: boolean;
 }
@@ -15,23 +16,24 @@ const NavCatergoryDD = ({
   label,
   floating = false,
 }: INavCatergoryDD) => {
-  const CATEGORIES = getCategories();
   return (
     <>
       <div className={"relative"}>
-        <div
+        <button
+          type="button"
+          aria-expanded={openDD}
           className={combineClasses(
             "flex items-center cursor-pointer",
             floating ? "mx-2" : "justify-between"
           )}
           onClick={() => setOpenDD(!openDD)}
         >
-          <p className="my-0">{label}</p>
-          <BiChevronDown className="text-[20px]" />
-        </div>
+          <span>{label}</span>
+          <BiChevronDown className="text-[20px]" aria-hidden="true" />
+        </button>
         <div
           className={combineClasses(
-            "overflow-auto",
+            openDD ? "overflow-auto" : "hidden",
             floating
               ? "absolute w-[180px] z-20 top-[30px] rounded-[4px] shadow-lg bg-white dark:bg-slate-800 border border-gray-300 dark:border-0"
               : "relative",
@@ -41,7 +43,7 @@ const NavCatergoryDD = ({
           <LinkTo href={"/blog"} passHref className="block text-sm py-2 px-2">
             <span onClick={() => setOpenDD(!openDD)}>All Articles</span>
           </LinkTo>
-          {CATEGORIES && CATEGORIES.map((each) => (
+          {categories.map((each) => (
             <LinkTo
               href={"/blog?category=" + each}
               key={each}

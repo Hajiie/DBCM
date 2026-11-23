@@ -17,7 +17,7 @@ import classes from "./Navbar.module.scss";
 import SocialShareModal from "../SocialShare/SocialShareModal";
 
 const Navbar = () => {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const [isMobile, setIsMobile] = useState(false);
   const [openSidebar, setOpenSidebar] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
@@ -35,7 +35,7 @@ const Navbar = () => {
   }, [showSearch]);
 
   const changeTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
   };
 
   const [scrolled, setScrolled] = useState(false);

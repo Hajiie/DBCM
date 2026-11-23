@@ -1,7 +1,6 @@
 import { THEMES } from "../shared/enums";
 import { useRouter } from "next/router";
-import { SORTED_ARTICLES_BY_DATE } from "../../BLOG_CONSTANTS/_ARTICLES_LIST";
-import { iArticle, iSEO } from "../shared/interfaces";
+import { iSEO } from "../shared/interfaces";
 import { WEBSITE_NAME, WEBSITE_URL } from "../../BLOG_CONSTANTS/_BLOG_SETUP";
 import { MOCK_ARTICLES_LIST } from "../constants/mocks";
 import { GAEvent } from "../../google";
@@ -99,31 +98,10 @@ export const removeBodyNoScroll = (): void => {
   document.body.classList.remove("no-scroll");
 };
 
-/**
- * Returns Article details from SORTED_ARTICLES_BY_DATE wrt the path
- * @returns iArticle
- */
-export const getArticleDetails = (): iArticle => {
+export const getArticleDetails = () => {
   const router = useRouter();
   const articlePath = "/pages" + router.pathname + ".tsx";
-  return (
-    MOCK_ARTICLES_LIST.filter((each) => each.path.includes(articlePath))[0] ||
-    SORTED_ARTICLES_BY_DATE.filter((each) => each.path.includes(articlePath))[0]
-  );
-};
-
-/**
- * Returns list of categories from SORTED_ARTICLES_BY_DATE
- * @returns string[]
- */
-export const getCategories = (): string[] => {
-  let categories: string[] = [];
-  SORTED_ARTICLES_BY_DATE.forEach((each) => {
-    if (each.preview.category && !categories.includes(each.preview.category)) {
-      categories.push(each.preview.category);
-    }
-  });
-  return categories;
+  return MOCK_ARTICLES_LIST.find((article) => article.path === articlePath);
 };
 
 /**
@@ -132,7 +110,7 @@ export const getCategories = (): string[] => {
  * @returns
  */
 export const transformPath = (path = ""): string => {
-  return path.replace("/pages", "").replace(".tsx", "");
+  return path.replace(/^\/pages\//, "/").replace(/\.tsx(?=\/?([?#]|$))/, "");
 };
 
 /**
@@ -141,7 +119,7 @@ export const transformPath = (path = ""): string => {
  * @returns string
  */
 export const transformImagePaths = (path = ""): string => {
-  return path.replace("/public", "");
+  return path.replace(/^\/public\//, "/");
 };
 
 /**
@@ -157,79 +135,39 @@ export const CREATE_SEO_CONFIG = (PAGE_SEO: iSEO) => {
   const router = useRouter();
   const ARTICLE_DETAILS = getArticleDetails();
 
-  // set url and path
-  const origin =
-    typeof window !== "undefined" && window.location.origin
-      ? window.location.origin
-      : "";
-  const LOCAL_URL = IS_DEV_MODE ? origin : WEBSITE_URL ? WEBSITE_URL : origin;
-  const LOCAL_PATH = ARTICLE_DETAILS
-    ? transformPath(ARTICLE_DETAILS.path)
-    : router.asPath;
-
-  const meta_description =
-    ARTICLE_DETAILS?.preview?.shortIntro || PAGE_SEO.description;
-
-  const keywords = PAGE_SEO?.keywords || ARTICLE_DETAILS?.preview?.tags;
-  const ogUrl = `${LOCAL_URL}${LOCAL_PATH}`;
-
-  const ogImage = PAGE_SEO.ogImage
-    ? `${LOCAL_URL}${transformImagePaths(PAGE_SEO?.ogImage)}`
-    : `${LOCAL_URL}${
-        ARTICLE_DETAILS?.preview.thumbnail
-          ? transformImagePaths(ARTICLE_DETAILS?.preview.thumbnail)
-          : null
-      }`;
-
-  const twitterHandle = PAGE_SEO?.twitterHandle || "";
-  const author = ARTICLE_DETAILS
-    ? ARTICLE_DETAILS?.preview.author.name
-    : PAGE_SEO?.author;
-
-  const title =
-    router.asPath === "/"
-      ? `${
-          ARTICLE_DETAILS
-            ? ARTICLE_DETAILS?.preview?.articleTitle
-            : PAGE_SEO?.title
-        } ${author ? "| " + author : null}`
-      : `${
-          ARTICLE_DETAILS
-            ? ARTICLE_DETAILS?.preview?.articleTitle
-            : PAGE_SEO?.title
-        } | ${WEBSITE_NAME} ${author ? "| " + author : null}`;
+  const path = transformPath(ARTICLE_DETAILS?.path) || router.asPath.split(/[?#]/)[0];
+  const url = WEBSITE_URL ? WEBSITE_URL.replace(/\/$/, "") + path : undefined;
+  const meta_description = PAGE_SEO.description || ARTICLE_DETAILS?.preview.shortIntro;
+  const keywords = PAGE_SEO.keywords || ARTICLE_DETAILS?.preview.tags;
+  const imagePath = transformImagePaths(PAGE_SEO.ogImage || ARTICLE_DETAILS?.preview.thumbnail);
+  const ogImage = imagePath.startsWith("/") && WEBSITE_URL ? WEBSITE_URL.replace(/\/$/, "") + imagePath : imagePath;
+  const twitterHandle = PAGE_SEO.twitterHandle || "";
+  const author = ARTICLE_DETAILS?.preview.author.name || PAGE_SEO.author;
+  const pageTitle = ARTICLE_DETAILS?.preview.articleTitle || PAGE_SEO.title || WEBSITE_NAME;
+  const title = [pageTitle, pageTitle === WEBSITE_NAME ? undefined : WEBSITE_NAME, author].filter(Boolean).join(" | ");
 
   let seo_config = {
     title: title,
     description: meta_description,
-    canonical: "https://webexpe.com/",
-    additionalMetaTags: [
-      {
-        property: "keywords",
-        content: keywords,
-      },
-      {
-        property: "al:web:url",
-        content: ogUrl,
-      },
-    ],
+    canonical: url,
+    additionalMetaTags: keywords ? [{ name: "keywords", content: keywords }] : [],
     openGraph: {
       type: "website",
       locale: "en_IN",
-      url: ogUrl,
+      url,
       site_name: WEBSITE_NAME,
-      images: [
+      images: ogImage ? [
         {
           url: ogImage,
           width: 1200,
           height: 630,
           alt: title,
         },
-      ],
+      ] : undefined,
     },
     twitter: {
       handle: twitterHandle,
-      site: ogUrl,
+      site: url,
       cardType: "summary_large_image",
     },
   };
