@@ -24,6 +24,9 @@ export default async function save(req: NextApiRequest, res: NextApiResponse) {
     const result = await saveSection(section, revision, data, client);
     if (result.status === "invalid") return res.status(400).json({ error: "Check the section content." });
     if (result.status === "unauthorized") return res.status(401).json({ error: "Sign in to publish changes." });
+    if (result.status === "retired-photo") {
+      return res.status(422).json({ error: "This content uses a photo that was deleted. Remove its reference or upload the photo again." });
+    }
     if (result.status === "conflict") {
       return res.status(409).json({ error: "Someone has published changes to this section. Open the editor in a new tab to review the latest version." });
     }

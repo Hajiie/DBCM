@@ -3,6 +3,7 @@ import type { Content, Section, Revision, Snapshot } from "../content/model";
 import articles from "../content/articles.json";
 import members from "../content/members.json";
 import about from "../content/about.json";
+import { BLOG_IMAGE_BUCKET } from "../content/blog-images";
 import { publicClient } from "./supabase";
 import { validateSection } from "./validate-content";
 
@@ -35,6 +36,19 @@ export async function getSnapshot(client: SupabaseClient): Promise<Snapshot> {
   };
 }
 
+async function removeRetiredBlogImages(client: SupabaseClient) {
+  try {
+    const { data: paths, error } = await client.rpc("dbcm_pending_blog_image_deletions");
+    if (error) throw error;
+    if (!paths?.length) return;
+    const { error: deleteError } = await client.storage.from(BLOG_IMAGE_BUCKET).remove(paths);
+    if (deleteError) throw deleteError;
+  } catch (error) {
+    // The publish is already committed. Files still in Storage are retried on the next publish.
+    console.warn("Could not remove retired blog images", error);
+  }
+}
+
 export async function saveSection<K extends Section>(section: K, revision: number, data: Content[K], client: SupabaseClient) {
   const { data: published, error } = await client.rpc("dbcm_publish_section", {
     section_name: section,
@@ -42,8 +56,10 @@ export async function saveSection<K extends Section>(section: K, revision: numbe
     new_data: data,
   });
   if (error?.code === "42501") return { status: "unauthorized" } as const;
+  if (error?.code === "PT422") return { status: "retired-photo" } as const;
   if (error?.code === "22023" || error?.code === "23514") return { status: "invalid" } as const;
   if (error) throw error;
   if (published === null) return { status: "conflict" } as const;
+  await removeRetiredBlogImages(client);
   return { status: "saved", saved: { revision: published as number, data } } as const;
 }
