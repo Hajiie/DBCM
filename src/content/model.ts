@@ -1,4 +1,5 @@
 import type { iArticle } from "../shared/interfaces";
+import { blogImageUrl, type BlogPhoto } from "./blog-images";
 
 export const categories = ["News", "Paper", "Research", "Events"] as const;
 export const memberGroups = ["Professor", "Researchers", "Alumni"] as const;
@@ -16,6 +17,8 @@ export type Article = {
   date: string;
   image: string;
   featured: boolean;
+  coverPhoto?: string;
+  photos?: BlogPhoto[];
 };
 
 export type Member = {
@@ -42,6 +45,10 @@ export function articlePath(article: Article) {
   return `/${article.route}/${article.slug}/`;
 }
 
+export function articleCover(article: Article) {
+  return (article.coverPhoto ? blogImageUrl(article.coverPhoto) : undefined) || article.image;
+}
+
 export function articleCard(article: Article): iArticle {
   return {
     path: articlePath(article),
@@ -54,7 +61,7 @@ export function articleCard(article: Article): iArticle {
       }).format(new Date(article.date)),
       articleTitle: article.title,
       tags: article.tags,
-      thumbnail: article.image || "/images/DBCM_logo.png",
+      thumbnail: articleCover(article) || "/images/DBCM_logo.png",
       shortIntro: article.summary,
       category: article.category,
     },

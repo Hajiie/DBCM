@@ -5,6 +5,7 @@
 ## Vercel과 Supabase 연결
 
 1. 기존 Supabase 프로젝트의 **SQL Editor → New query**에서 [DBCM 마이그레이션](supabase/migrations/20261123000000_dbcm_portal.sql) 전체를 한 번 실행합니다. 사이트는 섹션을 처음 게시하기 전까지 저장소에 포함된 초기 콘텐츠를 표시합니다.
+   블로그 사진 첨부를 쓰려면 [사진 저장소 마이그레이션](supabase/migrations/20261123000100_dbcm_blog_images.sql)도 한 번 실행합니다.
 2. Vercel의 **dbcm → Settings → Environment Variables**에 두 값을 `Config`로 등록합니다. Supabase 프로젝트의 **Connect** 화면에서 복사할 수 있습니다.
 
    | 변수 | 값 |
@@ -65,6 +66,7 @@ npm start
 - **Blog**에서 글과 논문을 편집하거나 글을 추가·삭제합니다. 카테고리, 대표 이미지, 작성일, 작성자와 홈페이지 추천 여부를 설정할 수 있습니다.
 - **Members**에서 교수, 연구원, 졸업생 프로필을 추가·수정·삭제합니다.
 - **About Us**에서 제목, 부제, 소개 본문을 편집합니다.
-- 본문에는 Markdown을 사용합니다. 이미지는 기존 `/images/…` 경로나 HTTPS URL을 사용합니다. **Publish changes**를 누르면 해당 섹션이 공개됩니다.
+- **Upload cover image**에서 대표 이미지를 올립니다. **Attach photos**에서 고른 사진은 글 아래에 표시됩니다. 글당 12장까지 첨부할 수 있으며 파일당 최대 6 MB입니다.
+- 본문은 Markdown을 지원합니다. **Publish changes**를 누르면 해당 섹션이 공개됩니다. 첨부 목록에서 사진을 제거한 뒤 다시 게시하면 해당 글에서 빠집니다.
 
 기존 사이트 템플릿은 Web Expe의 [Next.js Simple Blog Template](https://github.com/webexpe13/blog-template-using-nextjs-typescript-tailwindcss)을 기반으로 합니다. [MIT 라이선스](LICENSE)를 따릅니다.

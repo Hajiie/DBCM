@@ -1,6 +1,8 @@
 import { useState, type ReactNode } from "react";
-import { articlePath, categories, memberGroups, type About, type Article, type Member } from "../../content/model";
+import { articleCover, articlePath, categories, memberGroups, type About, type Article, type Member } from "../../content/model";
+import { blogImageUrl, MAX_BLOG_PHOTOS } from "../../content/blog-images";
 import ContentMarkdown from "../ContentMarkdown";
+import BlogImagePicker from "./BlogImagePicker";
 import { primaryButton, secondaryButton, SelectField, TextField } from "./Fields";
 
 function CollectionEditor<T extends string | number>({ entries, selected, onSelect, label, onAdd, children }: {
@@ -59,13 +61,16 @@ function MarkdownField({ label, value, onChange, maxLength, required }: {
   );
 }
 
-export function ArticlesEditor({ data, published, onChange }: {
+export function ArticlesEditor({ data, published, onChange, onUploadBusy }: {
   data: Article[];
   published: Article[];
   onChange: (value: Article[]) => void;
+  onUploadBusy: (busy: boolean) => void;
 }) {
   const [selected, select] = useState(0);
   const article = data[selected];
+  const photos = article?.photos ?? [];
+  const cover = article && articleCover(article);
   const original = article && published.find((entry) => articlePath(entry) === articlePath(article));
   const update = (patch: Partial<Article>) => onChange(data.map((entry, index) => index === selected ? { ...entry, ...patch } : entry));
 
@@ -98,13 +103,44 @@ export function ArticlesEditor({ data, published, onChange }: {
           </div>
           {original && <a className="block text-sm text-sky-700 underline dark:text-sky-300" href={articlePath(original)} target="_blank" rel="noreferrer">View published article</a>}
           <TextField label="Summary" value={article.summary} onChange={(summary) => update({ summary })} maxLength={600} rows={3} required />
-          <TextField label="Cover image URL" value={article.image} onChange={(image) => update({ image })} maxLength={500} placeholder="/images/example.jpg or https://…" />
+          <div className="space-y-3 rounded-lg border border-slate-200 p-4 dark:border-slate-600">
+            {cover && (article.coverPhoto || /^(https:\/\/|\/images\/)/i.test(cover)) && (
+              <img src={cover} alt="Cover preview" className="h-28 w-44 rounded-md object-cover" referrerPolicy="no-referrer" />
+            )}
+            <BlogImagePicker key={`cover-${selected}`} label="Upload cover image" remaining={1} onBusy={onUploadBusy}
+              onUploaded={([photo]) => update({ coverPhoto: photo.path, image: "" })} />
+            <TextField label="Cover image URL" value={article.image} onChange={(image) => update({ image, coverPhoto: undefined })} maxLength={500} placeholder="/images/example.jpg or https://…" />
+            {article.coverPhoto && (
+              <button type="button" className="text-sm font-medium text-red-700 underline dark:text-red-300"
+                onClick={() => update({ coverPhoto: undefined })}>Remove cover image</button>
+            )}
+          </div>
           <TextField label="Tags" value={article.tags} onChange={(tags) => update({ tags })} maxLength={240} placeholder="Use commas between tags" />
           <label className="flex items-center gap-2 text-base">
             <input type="checkbox" checked={article.featured} onChange={(event) => update({ featured: event.currentTarget.checked })} />
             Feature on the homepage
           </label>
           <MarkdownField label="Article body" value={article.body} onChange={(body) => update({ body })} maxLength={40000} required />
+          <section className="space-y-3 rounded-lg border border-slate-200 p-4 dark:border-slate-600" aria-label="Attached photos">
+            <BlogImagePicker key={`photos-${selected}`} label="Attach photos" remaining={MAX_BLOG_PHOTOS - photos.length} multiple onBusy={onUploadBusy}
+              onUploaded={(uploaded) => update({ photos: [...photos, ...uploaded] })} />
+            <p className="text-sm text-slate-600 dark:text-slate-300">{photos.length} of {MAX_BLOG_PHOTOS} attached. Photos appear below the article.</p>
+            {photos.length > 0 && (
+              <ul className="grid gap-3 sm:grid-cols-2">
+                {photos.map((photo) => (
+                  <li key={photo.path} className="min-w-0 rounded-lg border border-slate-200 p-2 dark:border-slate-600">
+                    <img src={blogImageUrl(photo.path)} alt="" className="h-28 w-full rounded-md object-cover" loading="lazy" />
+                    <p className="mt-2 break-words text-sm">{photo.name}</p>
+                    <button type="button" className="mt-1 text-sm font-medium text-red-700 underline dark:text-red-300"
+                      aria-label={`Remove photo ${photo.name}`}
+                      onClick={() => update({ photos: photos.filter((entry) => entry.path !== photo.path) })}>
+                      Remove photo
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
           <button type="button" className="text-sm font-medium text-red-700 underline dark:text-red-300" onClick={() => {
             onChange(data.filter((_, index) => index !== selected));
             select(Math.max(0, selected - 1));

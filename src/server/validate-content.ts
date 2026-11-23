@@ -1,3 +1,4 @@
+import { blogImagePath, MAX_BLOG_PHOTOS } from "../content/blog-images";
 import { categories, memberGroups, type Content, type Section } from "../content/model";
 
 export class ContentError extends Error {}
@@ -56,8 +57,18 @@ const validators: { [K in Section]: (value: unknown) => Content[K] } = {
         throw new ContentError("Enter a valid publication date.");
       }
       if (typeof data.featured !== "boolean") throw new ContentError("Invalid featured setting.");
+      const photos = data.photos === undefined ? [] : list(data.photos, MAX_BLOG_PHOTOS).map((entry) => {
+        const photo = record(entry);
+        const path = field(photo.path, "photo path", 48);
+        if (!blogImagePath.test(path)) throw new ContentError("Use photos uploaded from the blog editor.");
+        return { path, name: field(photo.name, "photo name", 160) };
+      });
+      distinct(photos.map(({ path }) => path));
+      const coverPhoto = data.coverPhoto === undefined ? undefined : field(data.coverPhoto, "cover photo path", 48);
+      if (coverPhoto && !blogImagePath.test(coverPhoto)) throw new ContentError("Use a cover photo uploaded from the blog editor.");
       return {
-        route, slug, date,
+        route, slug, date, photos,
+        ...(coverPhoto && { coverPhoto }),
         title: field(data.title, "article title", 240),
         summary: field(data.summary, "summary", 600),
         body: field(data.body, "article body", 40_000),

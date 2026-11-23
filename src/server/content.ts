@@ -42,7 +42,7 @@ export async function saveSection<K extends Section>(section: K, revision: numbe
     new_data: data,
   });
   if (error?.code === "42501") return { status: "unauthorized" } as const;
-  if (error?.code === "22023") return { status: "invalid" } as const;
+  if (error?.code === "22023" || error?.code === "23514") return { status: "invalid" } as const;
   if (error) throw error;
   if (published === null) return { status: "conflict" } as const;
   return { status: "saved", saved: { revision: published as number, data } } as const;

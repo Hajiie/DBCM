@@ -27,16 +27,17 @@ export default function Editor({ email, initial }: Props) {
   const [section, setSection] = useState<Section>("articles");
   const [published, setPublished] = useState(initial);
   const [draft, setDraft] = useState(initial);
-  const [pending, setPending] = useState<"publish" | "logout" | null>(null);
+  const [pending, setPending] = useState<"publish" | "logout" | "upload" | null>(null);
   const [notice, setNotice] = useState<Notice | null>(null);
   const [resetKey, setResetKey] = useState(0);
   const signedOut = useRef(false);
 
   const dirty = (key: Section) => draft[key].data !== published[key].data;
   const hasUnsavedChanges = sections.some(dirty);
+  const warnBeforeLeaving = hasUnsavedChanges || pending === "upload";
 
   useEffect(() => {
-    if (!hasUnsavedChanges) return;
+    if (!warnBeforeLeaving) return;
     const warn = (event: BeforeUnloadEvent) => {
       if (signedOut.current) return;
       event.preventDefault();
@@ -44,7 +45,7 @@ export default function Editor({ email, initial }: Props) {
     };
     window.addEventListener("beforeunload", warn);
     return () => window.removeEventListener("beforeunload", warn);
-  }, [hasUnsavedChanges]);
+  }, [warnBeforeLeaving]);
 
   function update<K extends Section>(key: K, data: Content[K]) {
     setDraft((previous) => ({ ...previous, [key]: { ...previous[key], data } }));
@@ -147,7 +148,7 @@ export default function Editor({ email, initial }: Props) {
             </p>
           )}
           <fieldset key={resetKey} disabled={Boolean(pending)} className="min-w-0">
-            {section === "articles" && <ArticlesEditor data={draft.articles.data} published={published.articles.data} onChange={(data) => update("articles", data)} />}
+            {section === "articles" && <ArticlesEditor data={draft.articles.data} published={published.articles.data} onChange={(data) => update("articles", data)} onUploadBusy={(busy) => setPending(busy ? "upload" : null)} />}
             {section === "members" && <MembersEditor data={draft.members.data} onChange={(data) => update("members", data)} />}
             {section === "about" && <AboutEditor data={draft.about.data} onChange={(data) => update("about", data)} />}
           </fieldset>
